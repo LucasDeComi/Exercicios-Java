@@ -30,7 +30,7 @@ public class Ex1 {
         System.out.println("Insira o seu nome de usuário: ");
         conta.titular = scanner.nextLine(); // Lê o valor inserido e atribui à variável como String
 
-        Boolean encerrar = false;
+        boolean encerrar = false;
 
         while(!encerrar) {
             System.out.println("Para fazer um depósito, digite 'depositar'");
@@ -59,7 +59,11 @@ public class Ex1 {
                 case "encerrar":
                     encerrar = true;
                     break;
+                default:
+                    System.out.println("Comando inválido!");
+                    break;
             }
         }
+        scanner.close();
     }
 }
