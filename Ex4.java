@@ -45,34 +45,27 @@ public class Ex4 {
         inimigo.exibirStatus();
 
         Random random = new Random();
-        int caraCoroa = random.nextInt(2);
-        System.out.println((caraCoroa == 0 ? jogador.nome : inimigo.nome) + " começa!");
-        
-        boolean fimJogo = false;
-        if(caraCoroa == 1) {
-            inimigo.atacar(jogador);
-            if(jogador.vida <= 0) {
-                fimJogo = true;
-                System.out.println(inimigo.nome + " vence!");
-            }
+        Personagem atacante, defensor;
+        if(random.nextBoolean()) {
+            atacante = jogador;
+            defensor = inimigo;
         }
-        while(!fimJogo) {
-            for(int i = 0; i <= 1 && !fimJogo; i++) {
-                if(i == 0) {
-                    jogador.atacar(inimigo);
-                    if(inimigo.vida <= 0) {
-                        fimJogo = true;
-                        System.out.println(jogador.nome + " vence!");
-                    }
-                }
-                else {
-                    inimigo.atacar(jogador);
-                    if(jogador.vida <= 0) {
-                        fimJogo = true;
-                        System.out.println(inimigo.nome + " vence!");
-                    }
-                }
+        else {
+            atacante = inimigo;
+            defensor = jogador;
+        }
+        System.out.println(atacante.nome + " começa!");
+
+        while (atacante.vida > 0 && defensor.vida > 0) {
+            atacante.atacar(defensor);
+            if(defensor.vida <= 0) {
+                System.out.println(atacante.nome + " venceu!");
+                break;
             }
+
+            Personagem troca = atacante; // Sistema de troca. Variável troca criada para a troca de posições sem a perda de dados
+            atacante = defensor;
+            defensor = troca;
         }
         scanner.close();
     }
